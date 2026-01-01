@@ -7,7 +7,7 @@ function Users() {
 
   const fetchAPI = async () => {
       try{
-        const response = await axios.get("http://localhost:3030/api/users");
+        const response = await axios.get(`${API_URL}/users`);
         setUsers(response.data)
       } catch(error){
         console.log("Error while fetching data ", error);
@@ -19,7 +19,7 @@ function Users() {
   },[])
 
   const deleteUser = async (userId) => {
-    await axios.delete(`http://localhost:3030/api/user/delete/${userId}`);
+    await axios.delete(`${API_URL}/user/delete/${userId}`);
     fetchAPI();
   }
   

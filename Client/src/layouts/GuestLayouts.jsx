@@ -5,7 +5,7 @@ function GuestLayouts() {
   return (
     <div>
       <header>
-        <h1>Event App</h1>
+        <h1>App</h1>
       </header>
       <main>
         <Outlet />

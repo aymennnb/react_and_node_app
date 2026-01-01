@@ -12,7 +12,7 @@ function EditUser() {
 
     const handelSubmit = async (e) => {
         e.preventDefault();
-        await axios.put(`http://localhost:3030/api/user/update/${id}`, User)
+        await axios.put(`${API_URL}/user/update/${id}`, User)
             .then((response)=>{
                 console.log("User updated successfuly.")
                 navigate('/')
@@ -28,7 +28,7 @@ function EditUser() {
 
     useEffect(() => {
     const getuserToEdit = async () => {
-        await axios.get(`http://localhost:3030/api/user/${id}`)
+        await axios.get(`${API_URL}/user/${id}`)
         .then((response)=>{
             setUser(response.data);
         })

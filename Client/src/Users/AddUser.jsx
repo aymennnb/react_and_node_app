@@ -11,7 +11,7 @@ function AddUser() {
 
     const handelSubmit = async (e) => {
         e.preventDefault();
-        await axios.post("http://localhost:3030/api/user",User)
+        await axios.post(`${API_URL}/user`,User)
             .then((response)=>{
                 navigate('/')
             }) .catch((error)=>{

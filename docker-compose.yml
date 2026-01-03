@@ -13,7 +13,7 @@ services:
     ports:
       - "5000:5000"
     environment:
-      - MONGODB_URL=mongodb://mongodb:27017/zero_trust_project
+      - MONGODB_URL=mongodb://mongodb_container:27017/zero_trust_project
       - PORT=5000
       - PORTCLIENT=5173
       - JWT_SECRET=maSuperCleSecreteTresLongueEtAleatoire
@@ -24,7 +24,6 @@ services:
   client:
     build: ./client
     container_name: react_frontend
-    command: npm run dev -- --host
     ports:
       - "5173:5173"
     environment:

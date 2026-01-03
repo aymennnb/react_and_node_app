@@ -1,16 +1,13 @@
-FROM node:18-alpine AS builder
+FROM node:18-alpine
 WORKDIR /app
 
 COPY package*.json ./
 RUN npm install
 
-FROM node:18-alpine
-WORKDIR /app
-
-COPY --from=builder /app/node_modules ./node_modules
-COPY . .
-
 RUN addgroup -g 1001 -S appuser && adduser -S appuser -u 1001
+
+COPY --chown=appuser:appuser . .
+
 USER appuser
 
 EXPOSE 5000

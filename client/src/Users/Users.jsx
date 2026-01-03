@@ -36,7 +36,7 @@ function Users() {
   }, []);
 
   const deleteUser = async (userId) => {
-    if(window.confirm("Supprimer cet utilisateur ?")) {
+    if(window.confirm(`Supprimer cet utilisateur avec l'id : ${userId} ?`)) {
         await axios.delete(`${API_URL}/user/delete/${userId}`, getHeaders());
         fetchAPI();
     }

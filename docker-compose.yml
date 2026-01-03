@@ -2,6 +2,7 @@ services:
   mongodb:
     build: ./mongodb
     container_name: mongodb_container
+    image: database
     user: "999:999"
     networks:
       - server_net
@@ -17,6 +18,7 @@ services:
   server:
     build: ./server
     container_name: node_backend
+    image: server
     ports:
       - "5000:5000"
     environment:
@@ -41,6 +43,7 @@ services:
   client:
     build: ./client
     container_name: react_frontend
+    image: client
     ports:
       - "5173:5173"
     environment:

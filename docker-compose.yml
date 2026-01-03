@@ -1,11 +1,18 @@
 services:
   mongodb:
-    image: mongo:latest
+    build: ./mongodb
     container_name: mongodb_container
+    user: "999:999"
     networks:
       - server_net
     volumes:
       - mongo-data:/data/db
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    logging:
+      driver: "json-file"
 
   server:
     build: ./server
@@ -17,9 +24,19 @@ services:
       - PORT=5000
       - PORTCLIENT=5173
       - JWT_SECRET=maSuperCleSecreteTresLongueEtAleatoire
+      - PORT=5000
     networks:
       - client_net
       - server_net
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    read_only: true
+    tmpfs:
+      - /tmp
+    depends_on:
+      - mongodb
 
   client:
     build: ./client
@@ -30,6 +47,10 @@ services:
       - VITE_API_URL=http://localhost:5000/api
     networks:
       - client_net
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
 
 networks:
   client_net:

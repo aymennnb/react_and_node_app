@@ -1,7 +1,11 @@
 server/.env
 server/node_modules/
 
-Client/node_modules/
-Client/.env
+client/node_modules/
+client/.env
 
 .idea/
+
+server/certs/*.key
+server/certs/*.pem
+server/certs/*.crt

@@ -1,0 +1,41 @@
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb_container
+    networks:
+      - server_net
+    volumes:
+      - mongo-data:/data/db
+
+  server:
+    build: ./server
+    container_name: node_backend
+    ports:
+      - "5000:5000"
+    environment:
+      - MONGODB_URL=mongodb://mongodb:27017/zero_trust_project
+      - PORT=5000
+      - PORTCLIENT=5173
+    networks:
+      - client_net
+      - server_net
+
+  client:
+    build: ./client
+    container_name: react_frontend
+    command: npm run dev -- --host
+    ports:
+      - "5173:5173"
+    environment:
+      - VITE_API_URL=http://localhost:5000/api
+    networks:
+      - client_net
+
+networks:
+  client_net:
+    driver: bridge
+  server_net:
+    driver: bridge
+
+volumes:
+  mongo-data:

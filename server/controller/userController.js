@@ -1,8 +1,14 @@
 const User = require('../models/user');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 const createUser = async(req,res) => {
     try {
-        const newUser = new User(req.body);
+        const { password } = req.body;
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        const newUser = new User({...req.body, password: hashedPassword});
+
         const {email} = newUser;
         const existing = await User.findOne({email});
         if (existing) {
@@ -12,6 +18,33 @@ const createUser = async(req,res) => {
         res.status(201).json({ message: "User created successfully."});
     } catch(error) {
         res.status(500).json({ error: error.message })
+    }
+}
+
+const loginUser = async (req, res) => {
+    try {
+        const { email, password } = req.body;
+        const user = await User.findOne({ email });
+
+        if (!user || !user.password) {
+            return res.status(401).json({ message: "Invalid credentials" });
+        }
+
+        const validPassword = await bcrypt.compare(password, user.password);
+
+        if (!validPassword) {
+            return res.status(401).json({ message: "Invalid credentials" });
+        }
+
+        const token = jwt.sign(
+            { id: user._id, email: user.email },
+            process.env.JWT_SECRET,
+            { expiresIn: '1h' }
+        );
+
+        res.status(200).json({ token });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
     }
 }
 
@@ -68,4 +101,4 @@ const deleteUser = async (req,res) => {
     }
 }
 
-module.exports = { createUser,getUsers,getUserById,updateUser,deleteUser };
+module.exports = { createUser, loginUser, getUsers, getUserById, updateUser, deleteUser };

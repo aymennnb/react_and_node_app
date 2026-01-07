@@ -4,14 +4,14 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 
-RUN addgroup -g 1001 -S appuser && adduser -S appuser -u 1001
+RUN addgroup -g 1001 -S webuser && adduser -S webuser -u 1001
 
-RUN chown -R appuser:appuser /app && \
+RUN chown -R webuser:webuser /app && \
     chmod 755 /app
 
-COPY --chown=appuser:appuser . .
+COPY --chown=webuser:webuser . .
 
-USER appuser
+USER webuser
 
 EXPOSE 5173
 

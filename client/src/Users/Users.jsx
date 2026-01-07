@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import { Link, useNavigate } from "react-router-dom";
 
+
 const API_URL = import.meta.env.VITE_API_URL;
 
 function Users() {
@@ -49,40 +50,46 @@ function Users() {
 
   return (
     <div>
-      <h2>Liste des utilisateurs</h2>
-      <button onClick={logout}>Se Déconnecter</button>
-      <br/><br/>
+          <h2 className="page-title">Liste des utilisateurs</h2>
+          <p className="page-subtitle">Gestion des comptes (ajout, modification, suppression).</p>
 
-      <Link to='/users/add'><button>Ajouter un utilisateur</button></Link>
+          <div className="actions">
+            <button className="button" onClick={logout}>Se Déconnecter</button>
+            <Link to='/users/add'><button className="button button--primary">Ajouter un utilisateur</button></Link>
+          </div><br/>
 
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Nom</th>
-            <th>Email</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {users.length > 0 ? (
-            users.map((u) => (
-              <tr key={u._id}>
-                <td>{u._id}</td>
-                <td>{u.username}</td>
-                <td>{u.email}</td>
-                <td>
-                  <Link to={`/users/edit/${u._id}`}><button>Edit</button></Link>
-                  <button onClick={() => deleteUser(u._id)}>Delete</button>
-                </td>
+          <div className="card">
+          <table className="table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nom</th>
+                <th>Email</th>
+                <th>Actions</th>
               </tr>
-            ))
-          ) : (
-            <tr><td colSpan="4">Aucun utilisateur ou chargement...</td></tr>
-          )}
-        </tbody>
-      </table>
-    </div>
+            </thead>
+            <tbody>
+              {users.length > 0 ? (
+                users.map((u) => (
+                  <tr key={u._id}>
+                    <td className="mono">{u._id}</td>
+                    <td>{u.username}</td>
+                    <td>{u.email}</td>
+                    <td>
+                      <div className="actions">
+                        <Link to={`/users/edit/${u._id}`}><button className="button">Edit</button></Link>
+                        <button className="button button--danger" onClick={() => deleteUser(u._id)}>Delete</button>
+                      </div>
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr><td colSpan="4" className="empty">Aucun utilisateur ou chargement...</td></tr>
+              )}
+            </tbody>
+          </table>
+          </div>
+        </div>
   );
 }
 

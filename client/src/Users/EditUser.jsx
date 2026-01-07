@@ -44,18 +44,23 @@ function EditUser() {
     }, [id]);
 
   return (
-    <div>
-        <h2>Edit User ID: {id}</h2>
-        <form onSubmit={handelSubmit}>
-            <label>Username</label>
-            <input type="text" value={User.username} name="username" onChange={inputHandler} />
-            <br/>
-            <label>Email</label>
-            <input type="text" value={User.email} name="email" onChange={inputHandler} />
-            <br/>
-            <button type='submit'>Update</button>
-        </form>
-        <Link to='/'><button>Back</button></Link>
+    <div className="card card--auth">
+            <h2 className="page-title">Modifier l'utilisateur</h2>
+            <p className="page-subtitle">ID: <span className="mono">{id}</span></p>
+            <form className="form" onSubmit={handelSubmit}>
+                <div className="form-row">
+                    <label className="label">Username</label>
+                    <input className="input" type="text" value={User.username} name="username" onChange={inputHandler} />
+                </div>
+                <div className="form-row">
+                    <label className="label">Email</label>
+                    <input className="input" type="text" value={User.email} name="email" onChange={inputHandler} />
+                </div>
+                <div className="actions">
+                    <button className="button button--primary" type='submit'>Update</button>
+                    <Link to='/'><button className="button" type="button">Back</button></Link>
+                </div>
+            </form>
     </div>
   )
 }

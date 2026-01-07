@@ -26,21 +26,27 @@ function Register() {
     };
 
     return (
-        <div>
-            <h2>Inscription</h2>
-            <form onSubmit={handleRegister}>
-                <label>Nom d'utilisateur: </label>
-                <input type="text" name="username" onChange={inputHandler} required />
-                <br/>
-                <label>Email: </label>
-                <input type="email" name="email" onChange={inputHandler} required />
-                <br/>
-                <label>Mot de passe: </label>
-                <input type="password" name="password" onChange={inputHandler} required />
-                <br/>
-                <button type="submit">S'inscrire</button>
-            </form>
-            <Link to="/login"><button>Retour Login</button></Link>
+        <div className="card card--auth">
+                    <h2 className="page-title">Inscription</h2>
+                    <p className="page-subtitle">Crée un compte pour te connecter.</p>
+                    <form className="form" onSubmit={handleRegister}>
+                        <div className="form-row">
+                            <label className="label">Nom d'utilisateur</label>
+                            <input className="input" type="text" name="username" onChange={inputHandler} required />
+                        </div>
+                        <div className="form-row">
+                            <label className="label">Email</label>
+                            <input className="input" type="email" name="email" onChange={inputHandler} required />
+                        </div>
+                        <div className="form-row">
+                            <label className="label">Mot de passe</label>
+                            <input className="input" type="password" name="password" onChange={inputHandler} required />
+                        </div>
+                        <div className="actions">
+                            <button className="button button--primary" type="submit">S'inscrire</button>
+                            <Link to="/login" className="label">Retour Login</Link>
+                        </div>
+                    </form>
         </div>
     );
 }

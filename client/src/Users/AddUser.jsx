@@ -32,22 +32,28 @@ function AddUser() {
     };
 
   return (
-    <div>
-        <h2>Add new User (Admin)</h2>
-        <form onSubmit={handelSubmit}>
-            <label>Username</label>
-            <input type="text" name="username" onChange={inputHandler} required />
-            <br/>
-            <label>Email</label>
-            <input type="email" name="email" onChange={inputHandler} required />
-            <br/>
-            <label>Password</label>
-            <input type="password" name="password" onChange={inputHandler} required />
-            <br/>
-            <button type='submit'>Add</button>
-        </form>
-        <Link to='/'><button>Back</button></Link>
-    </div>
+    <div className="card card--auth">
+            <h2 className="page-title">Ajouter un utilisateur</h2>
+            <p className="page-subtitle">Création d'un compte utilisateur.</p>
+            <form className="form" onSubmit={handelSubmit}>
+                <div className="form-row">
+                    <label className="label">Username</label>
+                    <input className="input" type="text" name="username" onChange={inputHandler} required />
+                </div>
+                <div className="form-row">
+                    <label className="label">Email</label>
+                    <input className="input" type="email" name="email" onChange={inputHandler} required />
+                </div>
+                <div className="form-row">
+                    <label className="label">Password</label>
+                    <input className="input" type="password" name="password" onChange={inputHandler} required />
+                </div>
+                <div className="actions">
+                    <button className="button button--primary" type='submit'>Add</button>
+                    <Link to='/'><button className="button" type="button">Back</button></Link>
+                </div>
+            </form>
+        </div>
   )
 }
 

@@ -25,18 +25,23 @@ function Login() {
     };
 
     return (
-        <div>
-            <h2>Connexion</h2>
-            <form onSubmit={handleLogin}>
-                <label>Email: </label>
-                <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} required />
-                <br/>
-                <label>Mot de passe: </label>
-                <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-                <br/>
-                <button type="submit">Se connecter</button>
-            </form>
-            <p>Pas encore de compte ? <Link to="/register">S'inscrire</Link></p>
+        <div className="card card--auth">
+                    <h2 className="page-title">Connexion</h2>
+                    <p className="page-subtitle">Connecte-toi pour accéder à l'application.</p>
+                    <form className="form" onSubmit={handleLogin}>
+                        <div className="form-row">
+                            <label className="label">Email</label>
+                            <input className="input" type="text" value={email} onChange={(e) => setEmail(e.target.value)} required />
+                        </div>
+                        <div className="form-row">
+                            <label className="label">Mot de passe</label>
+                            <input className="input" type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+                        </div>
+                        <div className="actions">
+                            <button className="button button--primary" type="submit">Se connecter</button>
+                            <span className="label">Pas encore de compte ? <Link to="/register">S'inscrire</Link></span>
+                        </div>
+                    </form>
         </div>
     );
 }
